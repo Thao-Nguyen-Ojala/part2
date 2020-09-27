@@ -12,9 +12,7 @@ function App() {
   const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
-    console.log("effect");
     Axios.get("http://localhost:3001/phonebook").then((response) => {
-      console.log("promise fulfilled");
       setPersons(response.data);
     });
   }, []);
