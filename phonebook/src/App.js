@@ -68,7 +68,9 @@ function App() {
 
   const removeContact = (contactId) => {
     const updateContact = [...persons];
-
+    const deletedPerson = updateContact.filter(
+      (person) => person.id === contactId
+    );
     const afterDelete = updateContact.filter(
       (person) => person.id !== contactId
     );
@@ -79,7 +81,7 @@ function App() {
       })
       .catch((err) => {
         setErrorMessage(
-          "Information of ERROR has already been removed from server"
+          `Information of ${deletedPerson[0].name} has already been removed from server`
         );
         setTimeout(() => {
           setErrorMessage(null);
@@ -103,98 +105,48 @@ function App() {
     person.name.toLowerCase().includes(filterValue.toLowerCase())
   );
 
-  if (!successMessage && !errorMessage) {
-    return (
-      <div>
-        <h2>Phonebook</h2>
-        <Filter
-          filterValue={filterValue}
-          onFilterList={handleFilterList}
-          setFilterValue={setFilterValue}
-        />
-
-        <h3>Add a new</h3>
-        <PersonForm
-          addContact={handleNewContact}
-          newName={newName}
-          onNameInput={handleNameInput}
-          setNewName={setNewName}
-          newNumber={newNumber}
-          onNumberInput={handleNumberInput}
-          setNewNumber={setNewNumber}
-        />
-
-        <h3>Numbers</h3>
-
-        <Persons
-          personsToRender={personsToRender}
-          onRemoveContact={removeContact}
-        />
-      </div>
-    );
-  }
+  let message;
+  let isMessageError;
   if (successMessage) {
-    return (
-      <div>
-        <h2>Phonebook</h2>
-        <Notification successMessage={successMessage} />
-        <Filter
-          filterValue={filterValue}
-          onFilterList={handleFilterList}
-          setFilterValue={setFilterValue}
-        />
-
-        <h3>Add a new</h3>
-        <PersonForm
-          addContact={handleNewContact}
-          newName={newName}
-          onNameInput={handleNameInput}
-          setNewName={setNewName}
-          newNumber={newNumber}
-          onNumberInput={handleNumberInput}
-          setNewNumber={setNewNumber}
-        />
-
-        <h3>Numbers</h3>
-
-        <Persons
-          personsToRender={personsToRender}
-          onRemoveContact={removeContact}
-        />
-      </div>
-    );
+    message = successMessage;
+    isMessageError = false;
   }
   if (errorMessage) {
-    return (
-      <div>
-        <h2>Phonebook</h2>
-        <Notification errorMessage={errorMessage} />
-        <Filter
-          filterValue={filterValue}
-          onFilterList={handleFilterList}
-          setFilterValue={setFilterValue}
-        />
-
-        <h3>Add a new</h3>
-        <PersonForm
-          addContact={handleNewContact}
-          newName={newName}
-          onNameInput={handleNameInput}
-          setNewName={setNewName}
-          newNumber={newNumber}
-          onNumberInput={handleNumberInput}
-          setNewNumber={setNewNumber}
-        />
-
-        <h3>Numbers</h3>
-
-        <Persons
-          personsToRender={personsToRender}
-          onRemoveContact={removeContact}
-        />
-      </div>
-    );
+    message = errorMessage;
+    isMessageError = true;
   }
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      {message && (
+        <Notification message={message} isMessageError={isMessageError} />
+      )}
+
+      <Filter
+        filterValue={filterValue}
+        onFilterList={handleFilterList}
+        setFilterValue={setFilterValue}
+      />
+
+      <h3>Add a new</h3>
+      <PersonForm
+        addContact={handleNewContact}
+        newName={newName}
+        onNameInput={handleNameInput}
+        setNewName={setNewName}
+        newNumber={newNumber}
+        onNumberInput={handleNumberInput}
+        setNewNumber={setNewNumber}
+      />
+
+      <h3>Numbers</h3>
+      <Persons
+        personsToRender={personsToRender}
+        onRemoveContact={removeContact}
+      />
+    </div>
+  );
 }
 
 export default App;

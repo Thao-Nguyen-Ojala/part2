@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3001/phonebook";
+const url = "http://localhost:3001/persons";
 
 const getData = () => {
   const request = axios.get(url);
@@ -17,8 +17,7 @@ const editContact = (id, newContact) => {
 };
 
 const removeContact = (id) => {
-  const request = axios.delete(`${url}/${id}`);
-  return request.then((response) => response.data).catch((error) => error);
+  return axios.delete(`${url}/${id}`);
 };
 
 export default {

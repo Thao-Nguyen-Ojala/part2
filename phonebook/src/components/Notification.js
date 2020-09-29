@@ -1,15 +1,11 @@
 import React from "react";
 
-const Notification = ({ successMessage, errorMessage }) => {
-  if (successMessage === null) {
+const Notification = ({ message, isMessageError }) => {
+  let styleName = isMessageError ? "error" : "success";
+  if (message === null) {
     return null;
-  } else if (successMessage) {
-    return <div className="success">{successMessage}</div>;
-  } else if (errorMessage === null) {
-    return null;
-  } else if (errorMessage) {
-    return <div className="error">{errorMessage}</div>;
   }
+  return <div className={styleName}>{message}</div>;
 };
 
 export default Notification;
