@@ -1,8 +1,14 @@
 {
   "phonebook": [
-    { "name": "Arto Hellas", "number": "040-123456" },
-    { "name": "Ada Lovelace", "number": "39-44-5323523" },
-    { "name": "Dan Abramov", "number": "12-43-234345" },
-    { "name": "Mary Poppendieck", "number": "39-23-6423122" }
+    {
+      "name": "Juho",
+      "number": "7458641685325",
+      "id": 6
+    },
+    {
+      "name": "Thao",
+      "number": "6535435465",
+      "id": 10
+    }
   ]
 }

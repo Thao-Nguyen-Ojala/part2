@@ -16,6 +16,7 @@ const PersonForm = (props) => {
   useEffect(() => {
     setNewNumber(newNumber);
   }, [setNewNumber, newNumber]);
+
   return (
     <form onSubmit={addContact}>
       <div>
